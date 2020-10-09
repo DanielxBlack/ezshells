@@ -5,6 +5,7 @@
 
 # libraries
 import argparse
+import ipaddress
 import pyperclip
 
 
@@ -31,7 +32,32 @@ port = args.port
 language = (args.language).lower()
 
 
-# set ports local for reverse shell, target for bind shell
+# Validate IP Address
+IPv4Addy = [attackerIP]
+
+for addy in IPv4Addy:
+
+    try:
+        addr4 = ipaddress.ip_address(attackerIP)
+        if addr4.version == 4:
+            continue
+
+    except ValueError:
+        print("That's not an IPv4 Address, you wanker!")
+        exit()
+
+
+# validate port
+
+
+portNumber = int(port)
+if 1 <= portNumber <= 65536:
+    print()
+else:
+    print("Use a valid port number, you Wally!")
+    exit()
+
+portNumber = str(portNumber)
 
 
 # What language?
