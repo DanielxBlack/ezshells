@@ -41,26 +41,17 @@ for addy in IPv4Addy:
         addr4 = ipaddress.ip_address(attackerIP)
         if addr4.version == 4:
             continue
-
     except ValueError:
         print("That's not an IPv4 Address, you wanker!")
         exit()
 
 
 # validate port
-
-
-portNumber = int(port)
-if 1 <= portNumber <= 65536:
+if 0 <= int(port) <= 65535:
     print()
 else:
     print("Use a valid port number, you Wally!")
     exit()
-
-portNumber = str(portNumber)
-
-
-# What language?
 
 
 def ezShell():
