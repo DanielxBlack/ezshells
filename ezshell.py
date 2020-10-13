@@ -36,7 +36,6 @@ language = (args.language).lower()
 IPv4Addy = [attackerIP]
 
 for addy in IPv4Addy:
-
     try:
         addr4 = ipaddress.ip_address(attackerIP)
         if addr4.version == 4:
@@ -47,11 +46,18 @@ for addy in IPv4Addy:
 
 
 # validate port
-if 0 <= int(port) <= 65535:
-    print()
-else:
-    print("Use a valid port number, you Wally!")
-    exit()
+userPort = [port]
+
+for aPort in userPort:
+    try:
+        if 0 <= int(port) <= 65535:
+            print()
+        else:
+            print("Use a valid port number, you Wally!")
+            exit()
+    except ValueError:
+        print("You tosser, that's not a valid port. That's not even a bleedin' number!")
+        exit()
 
 
 def ezShell():
